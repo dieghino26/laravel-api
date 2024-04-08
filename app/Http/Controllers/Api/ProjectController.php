@@ -13,7 +13,13 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $projects = Project::whereIsCompleted(true)->with('technologies')->with('type')->paginate(6);
+
+        foreach ($projects as $project) {
+            if ($project->image) $project->image = url('storage/' . $project->image);
+        };
+
+        return response()->json($projects);
     }
 
     /**
