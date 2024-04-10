@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\ProjectController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,5 +20,7 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::apiResource('projects', ProjectController::class)->only('index');
+Route::apiResource('/projects', ProjectController::class)->only('index');
 Route::get('/projects/{slug}', [ProjectController::class, 'show']);
+
+Route::post('/contact-message', [ContactController::class, 'message']);
